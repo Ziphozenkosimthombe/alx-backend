@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Least Recently Used caching module.
+"""Least Recently Used caching module.
 """
 from collections import OrderedDict
 
@@ -12,16 +11,14 @@ class LRUCache(BaseCaching):
     retrieving items from a dictionary with a LRU
     removal mechanism when the limit is reached.
     """
-    def __inti__(self):
-        """
-        initializes the cache
+    def __init__(self):
+        """Initializes the cache.
         """
         super().__init__()
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """
-        Adds an item in the cache
+        """Adds an item in the cache.
         """
         if key is None or item is None:
             return
@@ -29,14 +26,13 @@ class LRUCache(BaseCaching):
             if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
                 lru_key, _ = self.cache_data.popitem(True)
                 print("DISCARD:", lru_key)
-                self.cache_data[key] = item
-                self.cahe_data.move_to_end(key, last=False)
+            self.cache_data[key] = item
+            self.cache_data.move_to_end(key, last=False)
         else:
             self.cache_data[key] = item
 
     def get(self, key):
-        """
-        Retrieves an item by key.
+        """Retrieves an item by key.
         """
         if key is not None and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
