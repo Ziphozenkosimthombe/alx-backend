@@ -8,7 +8,7 @@ app.url_map.strict_slashes = False
 
 
 @app.route('/')
-def index():
+def get_index() -> str:
     return render_template('0-index.html')
 
 
